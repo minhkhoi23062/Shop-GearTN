@@ -62,6 +62,9 @@ const SignInPage = () => {
     const handleNavigateSignUp = () => {
         navigate('/sign-up')
     }
+    const handleNavigateForgotPassword = () => {
+        navigate('/forgot-password')
+    }
     const handleSignIn = () => {
         mutation.mutate({
             email,
@@ -112,7 +115,7 @@ const SignInPage = () => {
                             styletextbutton={{ color: '#fff', fontSize: '20px', fontWeight: '700' }}
                         ></ButtonComponent>
                     </Loading>
-                    <WrapperTextLight>Quên mật khẩu</WrapperTextLight>
+                    <WrapperTextLight onClick={handleNavigateForgotPassword}>Quên mật khẩu</WrapperTextLight>
                     <p style={{ marginTop: '5px' }}>Bạn chưa có tài khoản?
                         <WrapperTextLight onClick={handleNavigateSignUp}> Tạo tài khoản</WrapperTextLight></p>
                 </WrapperContainerleft>

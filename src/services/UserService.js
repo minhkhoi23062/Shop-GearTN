@@ -78,3 +78,8 @@ export const deleteManyUser = async (data, access_token) => {
     })
     return res.data
 }
+
+export const resetPassword = async (email) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/user/reset-password`, { email });
+    return res.data;
+};

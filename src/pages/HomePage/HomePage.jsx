@@ -1,7 +1,7 @@
 import React from 'react'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import TypeProduct from '../../components/TypeProduct/TypeProduct'
-import { WrapperButtonMore, WrapperProducts, WrapperTypeProduct } from './style'
+import { WrapperButtonMore, AdBanner, WrapperProducts, WrapperTypeProduct } from './style'
 import slider1 from '../../assets/images/slider1.png'
 import slider2 from '../../assets/images/slider2.png'
 import slider3 from '../../assets/images/slider3.png'
@@ -16,14 +16,17 @@ import Loading from '../../components/LoadingComponent/Loading'
 import { useDebounce } from '../../hooks/useDebounce'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import banner from '../../assets/images/banner2.webp'
+
 
 const HomePage = () => {
     const navigate = useNavigate();
     const searchProduct = useSelector((state) => state?.product?.search)
     const searchDebounce = useDebounce(searchProduct, 500)
     const [pending, setPending] = useState(false)
-    const [limit, setLimit] = useState(50)
+    const [limit, setLimit] = useState(20)
     const [typeProducts, setTypeProducts] = useState([])
+    const [showAdBanner, setShowAdBanner] = useState(true);
 
     const fetchProductAll = async (context) => {
         const limit = context?.queryKey && context?.queryKey[1]
@@ -51,6 +54,17 @@ const HomePage = () => {
 
     return (
         <Loading isPending={isPending || pending}>
+            {showAdBanner && (
+                <AdBanner>
+                    <button style={{ color: 'white' }} className="close-button" onClick={() => setShowAdBanner(false)}>×</button>
+                    <img
+                        src={banner}
+                        onClick={() => navigate('/SaleAll')}
+                        style={{ cursor: 'pointer' }}
+                        alt="Ad Banner"
+                    />
+                </AdBanner>
+            )}
             <div style={{ width: '1270px', margin: '0 auto' }}>
                 <div style={{ position: 'fixed', top: 170, left: 0 }}>
                     <div className="fixed-banner left-banner" onClick={() => navigate('/PcSale')}>
